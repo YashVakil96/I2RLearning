@@ -25,6 +25,7 @@ public class ThingsToHide : MonoBehaviour
 //right here, you can now use normalizedTime as the third parameter in any Lerp from start to end
             mat.color = Color.Lerp(start, end, normalizedTime);
             yield return null;
+            Debug.Log(mat.name);
         }
 
         mat.color = end; //without this, the value will end at something like 0.9992367
@@ -32,6 +33,7 @@ public class ThingsToHide : MonoBehaviour
 
     public void FadeToZero(Material mats)
     {
+        Debug.Log("Hide");
         StartCoroutine(DoAThingOverTime(mats, mats.color,
             new Color(mats.color.r, mats.color.g, mats.color.b, 0), 1));
 
@@ -40,6 +42,7 @@ public class ThingsToHide : MonoBehaviour
 
     public void FadeToOne(Material mats)
     {
+        Debug.Log("Show");
         StartCoroutine(DoAThingOverTime(mats, mats.color,
             new Color(mats.color.r, mats.color.g, mats.color.b, 1), 1));
         //set material color alpha to 1
@@ -90,7 +93,7 @@ public class ThingsToHide : MonoBehaviour
                 {
                     FadeToOne(mat);
                 }
-                part.SetActive(true);
+                // part.SetActive(true);
             }
         }
 
