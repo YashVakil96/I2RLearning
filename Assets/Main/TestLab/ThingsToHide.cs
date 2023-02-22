@@ -1,17 +1,16 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ThingsToHide : MonoBehaviour
 {
     public List<GameObject> parts;
+    public List<GameObject> texts;
     public int cycleState = 0;
 
     private void Start()
     {
-        Debug.Log(parts.Count);
-        Debug.Log(parts.Capacity);
+        Hide(cycleState);
     }
 
     public void Next()
@@ -53,5 +52,17 @@ public class ThingsToHide : MonoBehaviour
                 part.SetActive(true);
             }
         }
+        foreach (var part in texts)
+        {
+            if (part != texts[index])
+            {
+                part.SetActive(false);
+            }
+            else
+            {
+                part.SetActive(true);
+            }
+        }
+        
     }
 }
