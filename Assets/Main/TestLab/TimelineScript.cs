@@ -1,3 +1,4 @@
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -17,10 +18,20 @@ public class TimelineScript : MonoBehaviour
 
     public void BacteriaCamButton()
     {
+        StartCoroutine(HIVCam());
+    }
+
+    IEnumerator HIVCam()
+    {
+        enableCam.freeLook.enabled = !enableCam.freeLook.enabled;
         freeLookCam.SetActive(false);
         enableCam.freeLook = bacteriaCam;
+        bacteriaCam.Priority = 11;
         bacteriaCam.enabled = true;
+        yield return new WaitForEndOfFrame();
+        enableCam.freeLook.enabled = !enableCam.freeLook.enabled;
     }
+    
 
     public void PlayTimeline()
     {

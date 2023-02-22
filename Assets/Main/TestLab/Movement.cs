@@ -11,6 +11,4 @@ public class Movement : MonoBehaviour
         transform.DOMove(pos, 0.5f).SetLoops(-1, LoopType.Yoyo);
         
     }
-
-
 }
