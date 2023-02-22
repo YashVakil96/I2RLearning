@@ -30,19 +30,21 @@ public class ThingsToHide : MonoBehaviour
         mat.color = end; //without this, the value will end at something like 0.9992367
     }
 
-    public void FadeToZero(List<Material> mats, int index)
+    public void FadeToZero(Material mats)
     {
-        StartCoroutine(DoAThingOverTime(mats[index], mats[index].color, new Color(mats[index].color.r,mats[index].color.g,mats[index].color.b,0), 1));
+        StartCoroutine(DoAThingOverTime(mats, mats.color,
+            new Color(mats.color.r, mats.color.g, mats.color.b, 0), 1));
 
         //set material color alpha to 0
     }
 
-    public void FadeToOne(List<Material> mats, int index)
+    public void FadeToOne(Material mats)
     {
-        StartCoroutine(DoAThingOverTime(mats[index], mats[index].color, new Color(mats[index].color.r,mats[index].color.g,mats[index].color.b,1), 1));
+        StartCoroutine(DoAThingOverTime(mats, mats.color,
+            new Color(mats.color.r, mats.color.g, mats.color.b, 1), 1));
         //set material color alpha to 1
     }
-    
+
 
     public void Next()
     {
@@ -56,8 +58,6 @@ public class ThingsToHide : MonoBehaviour
             Hide(cycleState);
         }
     }
-    
-    
 
     public void Prev()
     {
@@ -78,14 +78,23 @@ public class ThingsToHide : MonoBehaviour
         {
             if (part != parts[index])
             {
-                part.SetActive(false);
+                foreach (var mat in part.transform.GetChild(0).GetComponent<MeshRenderer>().materials)
+                {
+                    FadeToZero(mat);
+                }
+                // part.SetActive(false);
             }
             else
             {
+                foreach (var mat in part.transform.GetChild(0).GetComponent<MeshRenderer>().materials)
+                {
+                    FadeToOne(mat);
+                }
                 part.SetActive(true);
             }
         }
 
+        //text
         foreach (var part in texts)
         {
             if (part != texts[index])

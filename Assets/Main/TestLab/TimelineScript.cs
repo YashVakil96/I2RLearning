@@ -48,7 +48,6 @@ public class TimelineScript : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(timeline.time);
         if (timeline.time > prevValue)
         {
             prevValue = timeline.duration;
