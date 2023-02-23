@@ -25,7 +25,6 @@ public class ThingsToHide : MonoBehaviour
 //right here, you can now use normalizedTime as the third parameter in any Lerp from start to end
             mat.color = Color.Lerp(start, end, normalizedTime);
             yield return null;
-            Debug.Log(mat.name);
         }
 
         mat.color = end; //without this, the value will end at something like 0.9992367
