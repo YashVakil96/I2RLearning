@@ -22,6 +22,7 @@ public class EventManager : MonoBehaviour
         Inside = 1,
         Antibody = 2,
         HIV = 3,
-        CD4 = 4
+        CD4 = 4,
+        VirusMed = 5
     }
 }
