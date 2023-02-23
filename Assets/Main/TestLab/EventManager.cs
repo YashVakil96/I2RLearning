@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static EventManager instance;
+    public State state;
+
+    private void Awake()
     {
-        
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        state = State.Man;
+    }
+
+    public enum State
+    {
+        Man = 0,
+        Inside = 1,
+        Antibody = 2,
+        HIV = 3,
+        CD4 = 4
     }
 }
