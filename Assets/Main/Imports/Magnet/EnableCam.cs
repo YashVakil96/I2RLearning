@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
@@ -8,8 +6,15 @@ public class EnableCam : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    public static EnableCam instance;
     public CinemachineFreeLook freeLook;
     public float scrollSensitivity = 5;
+    public bool ifCameraInTransition;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -18,20 +23,24 @@ public class EnableCam : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (!ifCameraInTransition)
         {
-            freeLook.enabled = true;
-        }
+            if (Input.GetMouseButton(0))
+            {
+                freeLook.enabled = true;
+            }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            freeLook.enabled = false;
-        }
+            if (Input.GetMouseButtonUp(0))
+            {
+                freeLook.enabled = false;
+            }
 
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        {
-            StartCoroutine(Zoom());
+            if (Input.GetAxis("Mouse ScrollWheel") != 0)
+            {
+                StartCoroutine(Zoom());
+            }    
         }
+        
     }
 
     /*void Zoom()

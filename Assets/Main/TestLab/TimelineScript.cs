@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
@@ -6,32 +7,19 @@ using UnityEngine.Rendering;
 
 public class TimelineScript : MonoBehaviour
 {
+
+    public static TimelineScript instance;
     public GameObject freeLookCam;
     public PlayableDirector timeline;
     public PlayableDirector antiBody;
     public double prevValue = 0;
     public FreeCamera freeCam;
     public Camera cam;
-    public CinemachineFreeLook bacteriaCam;
-    public EnableCam enableCam;
 
-
-    public void BacteriaCamButton()
+    private void Awake()
     {
-        StartCoroutine(HIVCam());
+        instance = this;
     }
-
-    IEnumerator HIVCam()
-    {
-        enableCam.freeLook.enabled = !enableCam.freeLook.enabled;
-        freeLookCam.SetActive(false);
-        enableCam.freeLook = bacteriaCam;
-        bacteriaCam.Priority = 11;
-        bacteriaCam.enabled = true;
-        yield return new WaitForEndOfFrame();
-        enableCam.freeLook.enabled = !enableCam.freeLook.enabled;
-    }
-    
 
     public void PlayTimeline()
     {
@@ -57,7 +45,6 @@ public class TimelineScript : MonoBehaviour
         {
             if (timeline.state  == PlayState.Paused)
             {
-                Debug.Log("Joker");
                 freeCam.enabled = true;
             }
         }
