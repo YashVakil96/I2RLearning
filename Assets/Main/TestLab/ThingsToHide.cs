@@ -16,7 +16,6 @@ public class ThingsToHide : MonoBehaviour
         Hide(cycleState);
     }
 
-
     IEnumerator DoAThingOverTime(Material mat, Color start, Color end, float duration)
     {
         for (float t = 0f; t < duration; t += Time.deltaTime)
@@ -32,7 +31,6 @@ public class ThingsToHide : MonoBehaviour
 
     public void FadeToZero(Material mats)
     {
-        Debug.Log("Hide");
         StartCoroutine(DoAThingOverTime(mats, mats.color,
             new Color(mats.color.r, mats.color.g, mats.color.b, 0), 1));
 
@@ -41,7 +39,6 @@ public class ThingsToHide : MonoBehaviour
 
     public void FadeToOne(Material mats)
     {
-        Debug.Log("Show");
         StartCoroutine(DoAThingOverTime(mats, mats.color,
             new Color(mats.color.r, mats.color.g, mats.color.b, 1), 1));
         //set material color alpha to 1
