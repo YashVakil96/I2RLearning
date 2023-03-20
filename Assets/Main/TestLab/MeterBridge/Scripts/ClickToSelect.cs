@@ -40,5 +40,7 @@ public class ClickToSelect : MonoBehaviour
     {
         Debug.Log(power);
         EventManagerMeterBridge.Instance.resistancePowerValue.text = power.ToString();
+        MeterBridge.Instance.resistanceBoxPower = power;
+        EventManagerMeterBridge.Instance.isItOn = true;
     }
 }
