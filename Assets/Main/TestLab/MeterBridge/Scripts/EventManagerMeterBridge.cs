@@ -10,7 +10,6 @@ public class EventManagerMeterBridge : MonoBehaviour
     public TMP_Text register;
     public TMP_Text l;
     public TMP_Text HunderedMinusL;
-    public TMP_Text found;
 
     public bool isItOn;
     

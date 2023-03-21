@@ -12,7 +12,11 @@ public class CalculateS : MonoBehaviour
 
     public void Calculate()
     {
+        valueR.text = EventManagerMeterBridge.Instance.resistancePowerValue.text;
         
+        valueL.text = MeterBridge.Instance.finalL.ToString();
+        value100MinusL.text = MeterBridge.Instance.hundredMinusL.ToString(); 
+        
+        answer.text = MeterBridge.Instance.finalRes.ToString();
     }
-     
 }

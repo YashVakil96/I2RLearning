@@ -10,6 +10,7 @@ public class MeterBridge : MonoBehaviour
     public double l;
     public double hundredMinusL;
     public double finalL;
+    public double finalRes;
     public GameObject movePenButton;
 
     private void Awake()
@@ -50,8 +51,7 @@ public class MeterBridge : MonoBehaviour
                 Debug.Log(i + " Found it");
                 var newi = Math.Round(i, 1);
                 Debug.Log(newi + " New I");
-
-                EventManagerMeterBridge.Instance.found.text = newi + " Found it";
+                finalRes = resistanceBoxPower * (i / HunderedMinusL(i));
                 finalL = newi;
                 break;
             }
