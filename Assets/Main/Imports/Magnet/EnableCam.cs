@@ -23,6 +23,10 @@ public class EnableCam : MonoBehaviour
 
     private void Update()
     {
+        if (MoveObject.isDragging)
+        {
+            return;
+        }
         if (!ifCameraInTransition)
         {
             if (Input.GetMouseButton(0))

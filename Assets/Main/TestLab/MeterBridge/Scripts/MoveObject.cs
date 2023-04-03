@@ -9,7 +9,7 @@ public class MoveObject : MonoBehaviour
     private float startXPos;
     private float startYPos;
 
-    private bool isDragging = false;
+    public static bool isDragging = false;
 
     public void StopAnimation()
     {
@@ -63,6 +63,22 @@ public class MoveObject : MonoBehaviour
         }
 
         mousePos = myCam.ScreenToWorldPoint(mousePos);
+        if (transform.position.x > 1.5f )
+        {
+            transform.localPosition =
+                new Vector3(1.47f, transform.localPosition.y, transform.localPosition.z);
+            isDragging = false;
+            return;
+        }
+        else if (transform.position.x < -2.1f)
+        {
+            
+            transform.localPosition =
+                new Vector3(-2f, transform.localPosition.y, transform.localPosition.z);
+            isDragging = false;
+            return;
+        }
+
         transform.localPosition =
             new Vector3(mousePos.x - startXPos, transform.localPosition.y, transform.localPosition.z);
     }
