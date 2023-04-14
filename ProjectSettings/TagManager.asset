@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Knob
+  - Bond
+  - Molecule
   layers:
   - Default
   - TransparentFX

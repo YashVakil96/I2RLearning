@@ -98,6 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e330d8f496588cd4fab44d92155cc391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MolecuteType: 0
+  currentlySelected: 0
+  NoOfBonds: 0
+  bonds: []
+  index: 
 --- !u!61 &-7973961908028996190
 BoxCollider2D:
   m_ObjectHideFlags: 0
