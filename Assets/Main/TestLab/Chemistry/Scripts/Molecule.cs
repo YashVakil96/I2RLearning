@@ -17,6 +17,8 @@ public class Molecule : MonoBehaviour
         name = MolecuteType.ToString();
         MoleculeManager.instance._molecules.Add(this);
     }
+    
+    
 }
 
 public enum MolecuteType

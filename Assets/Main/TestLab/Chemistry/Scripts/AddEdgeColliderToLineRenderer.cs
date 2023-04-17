@@ -16,20 +16,14 @@ public class AddEdgeColliderToLineRenderer : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         edgeCollider = GetComponent<EdgeCollider2D>();
+        edgeCollider.edgeRadius = 0.2f;
     }
 
     private void Start()
     {
         SetPoints();
     }
-
-    private void Update()
-    {
-        if (StateManager.IsMoving)
-        {
-            
-        }
-    }
+    
 
     private void SetPoints()
     {
@@ -45,6 +39,7 @@ public class AddEdgeColliderToLineRenderer : MonoBehaviour
 
     public void AdjustLineStartAndEnd(LineRenderer line, EdgeCollider2D edge, Vector3 lineStart, Vector3 lineEnd)
     {
+        
         line.SetPosition(0, lineStart);
         line.SetPosition(1, lineEnd);
         edge.points = new Vector2[] {lineStart, lineEnd};
