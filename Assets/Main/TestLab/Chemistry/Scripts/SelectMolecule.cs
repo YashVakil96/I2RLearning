@@ -1,10 +1,10 @@
-using System.IO;
-using Cinemachine;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class SelectMolecule : MonoBehaviour
 {
     public CreateMolecule createMolecule;
+    private GameObject a, b;
 
     private void Update()
     {
@@ -53,6 +53,29 @@ public class SelectMolecule : MonoBehaviour
                 }
             }
         }
+
+        if (StateManager.IsEditing)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (Selection().gameObject.CompareTag("Molecule"))
+                {
+                    var obj = Selection().GetComponent<Molecule>();
+                    if (MoleculeManager.instance.firstSelected)
+                    {
+                        MoleculeManager.instance.Second.Add(obj);
+                        MoleculeManager.instance.firstSelected = false;
+                        b = Instantiate(MoleculeManager.instance.number2, obj.transform);
+                    }
+                    else
+                    {
+                        MoleculeManager.instance.First.Add(obj);
+                        MoleculeManager.instance.firstSelected = true;
+                        a = Instantiate(MoleculeManager.instance.number1, obj.transform);
+                    }
+                }
+            }
+        }
     }
 
     public static Collider2D Selection()
@@ -63,11 +86,12 @@ public class SelectMolecule : MonoBehaviour
         hitInfo = Physics2D.Raycast(mousePosition, Vector2.zero);
         if (hitInfo.collider != null)
         {
-            return hitInfo.collider;
+            if (hitInfo.collider.gameObject.CompareTag("Molecule"))
+            {
+                return hitInfo.collider;
+            }
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
 }

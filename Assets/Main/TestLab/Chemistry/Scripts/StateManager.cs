@@ -28,5 +28,11 @@ public class StateManager : MonoBehaviour
         IsCreating = false;
         IsMoving = false;
     }
+
+    public void OnAnimate()
+    {
+        MoleculeManager.instance.CreateBonds();
+        BondManager.Instance.RemoveBonds();
+    }
     
 }
