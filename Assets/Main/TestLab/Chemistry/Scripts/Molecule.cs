@@ -14,6 +14,7 @@ public class Molecule : MonoBehaviour
 
     private void Awake()
     {
+        MolecuteType = MoleculeAssigner.CurrentMoleculeType;
         name = MolecuteType.ToString();
         MoleculeManager.instance._molecules.Add(this);
     }
@@ -23,8 +24,5 @@ public class Molecule : MonoBehaviour
 
 public enum MolecuteType
 {
-    a,
-    b,
-    c,
-    d
+    C,H,N,O,P,S,F,CL,BR,I
 }
