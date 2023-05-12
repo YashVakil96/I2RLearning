@@ -6,27 +6,33 @@ public class StateManager : MonoBehaviour
     public static bool IsMoving;
 
     public static bool IsCreating;
-    
+
     public static bool IsEditing;
+
+    public static bool createBenzene;
 
     public void StartMoving()
     {
+        StopAll();
         IsMoving = true;
-        IsCreating = false;
-        IsEditing = false;
     }
 
     public void StartCreating()
     {
+        StopAll();
         IsCreating = true;
-        IsMoving = false;
-        IsEditing = false;
     }
+
     public void StartEditing()
     {
+        StopAll();
         IsEditing = true;
-        IsCreating = false;
-        IsMoving = false;
+    }
+
+    public void StartBenzene()
+    {
+        StopAll();
+        createBenzene = true;
     }
 
     public void OnAnimate()
@@ -34,5 +40,13 @@ public class StateManager : MonoBehaviour
         MoleculeManager.instance.CreateBonds();
         BondManager.Instance.RemoveBonds();
     }
-    
+
+
+    public void StopAll()
+    {
+        IsMoving = false;
+        IsCreating = false;
+        IsEditing = false;
+        createBenzene = false;
+    }
 }

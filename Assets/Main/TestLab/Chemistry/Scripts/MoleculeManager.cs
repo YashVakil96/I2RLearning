@@ -20,8 +20,6 @@ public class MoleculeManager : MonoBehaviour
 
     public bool firstSelected;
 
-    public GameObject benzene;
-
 
     private void Awake()
     {
@@ -91,10 +89,5 @@ public class MoleculeManager : MonoBehaviour
         }
     }
 
-    public void PlaceBenzene()
-    {
-        var a = Instantiate(benzene,
-            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)),
-            quaternion.identity);
-    }
+    
 }
