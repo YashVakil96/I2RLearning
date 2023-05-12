@@ -80,13 +80,15 @@ public class MoleculeManager : MonoBehaviour
     {
         foreach (var obj in First)
         {
-            Destroy(obj.transform.GetChild(0).gameObject);
-        }
+            // Debug.Log(obj.transform.GetChild(10).gameObject.name);
+            Destroy(obj.transform.GetChild(10).gameObject);
+        }   
 
         foreach (var obj in Second)
         {
-            Destroy(obj.transform.GetChild(0).gameObject);
-        }
+            // Debug.Log(obj.transform.GetChild(10).gameObject.name);
+            Destroy(obj.transform.GetChild(10).gameObject);
+        }   
     }
 
     
