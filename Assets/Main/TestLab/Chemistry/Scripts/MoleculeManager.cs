@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class MoleculeManager : MonoBehaviour
     public float duration;
 
     public bool firstSelected;
+
+    public GameObject benzene;
 
 
     private void Awake()
@@ -86,5 +89,12 @@ public class MoleculeManager : MonoBehaviour
         {
             Destroy(obj.transform.GetChild(0).gameObject);
         }
+    }
+
+    public void PlaceBenzene()
+    {
+        var a = Instantiate(benzene,
+            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)),
+            quaternion.identity);
     }
 }
