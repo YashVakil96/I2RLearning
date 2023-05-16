@@ -8,7 +8,7 @@ public class CreateMolecule : MonoBehaviour
     public void Create()
     {
         var a = Instantiate(molecule,
-            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)),
+            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5)),
             quaternion.identity);
 
         a.tag = "Molecule";

@@ -34,7 +34,11 @@ public class Molecule : MonoBehaviour
             }
         }
     }
-    
+
+    private void OnDestroy()
+    {
+        MoleculeManager.instance._molecules.Remove(this);
+    }
 }
 
 public enum MolecuteType

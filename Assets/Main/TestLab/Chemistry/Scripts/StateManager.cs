@@ -10,6 +10,8 @@ public class StateManager : MonoBehaviour
     public static bool IsEditing;
 
     public static bool createBenzene;
+    
+    public static bool IsDeleting;
 
     public void StartMoving()
     {
@@ -35,6 +37,12 @@ public class StateManager : MonoBehaviour
         createBenzene = true;
     }
 
+    public void StartDelete()
+    {
+        StopAll();
+        IsDeleting = true;
+    }
+
     public void OnAnimate()
     {
         MoleculeManager.instance.CreateBonds();
@@ -48,5 +56,6 @@ public class StateManager : MonoBehaviour
         IsCreating = false;
         IsEditing = false;
         createBenzene = false;
+        IsDeleting = false;
     }
 }

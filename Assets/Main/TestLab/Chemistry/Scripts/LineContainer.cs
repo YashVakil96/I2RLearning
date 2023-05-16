@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class LineContainer : MonoBehaviour
 {
@@ -11,5 +12,28 @@ public class LineContainer : MonoBehaviour
         line = lineRenderer;
         startPos = start;
         endPose = end;
+    }
+
+    private void Start()
+    {
+
+        if (CalculateDistance()<.01f)
+        {
+            Destroy(this);
+        }
+    }
+    
+    private float CalculateDistance()
+    {
+        Vector3 startPoint = line.GetPosition(0);
+        Vector3 endPoint = line.GetPosition(1);
+
+        float distance = Vector3.Distance(startPoint, endPoint);
+        return distance;
+    }
+
+    private void OnDestroy()
+    {
+        BondManager.Instance.bonds.Remove(line);
     }
 }
