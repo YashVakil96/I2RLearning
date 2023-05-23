@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+
 public class LineContainer : MonoBehaviour
 {
     public LineRenderer line;
@@ -7,28 +8,25 @@ public class LineContainer : MonoBehaviour
     public Vector3 endPose;
     public bool markedToDelete;
 
-    public void SetValues(LineRenderer lineRenderer,Vector3 start , Vector3 end)
+    public void SetValues(LineRenderer lineRenderer, Vector3 start, Vector3 end)
     {
         line = lineRenderer;
         startPos = start;
         endPose = end;
-    }
-
-    private void Start()
-    {
-
-        if (CalculateDistance()<.01f)
+        if (CalculateDistance() < .1f)
         {
+            Debug.Log("DestroyLine");
             Destroy(this);
         }
     }
-    
+
     private float CalculateDistance()
     {
         Vector3 startPoint = line.GetPosition(0);
         Vector3 endPoint = line.GetPosition(1);
 
         float distance = Vector3.Distance(startPoint, endPoint);
+        Debug.Log(distance);
         return distance;
     }
 

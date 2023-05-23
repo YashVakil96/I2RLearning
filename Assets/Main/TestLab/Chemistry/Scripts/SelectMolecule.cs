@@ -22,6 +22,21 @@ public class SelectMolecule : MonoBehaviour
                     {
                         if (!CheckOnCanvas.OnCanvasBool)
                         {
+                            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                            RaycastHit hit;
+
+                            if (Physics.Raycast(ray, out hit))
+                            {
+                                // Check if the raycast hit an object with a collider
+                                if (hit.collider != null)
+                                {
+                                    Debug.Log("Overlap detected! Cannot create item.");
+                                    return;
+                                }
+                            }
+
+                            // No overlap detected, create the item at the mouse position
+                            // Instantiate(itemPrefab, hit.point, Quaternion.identity);
                             createMolecule.Create();
                         }
                     }
