@@ -1,17 +1,20 @@
-using TMPro;
+using System;
 using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    public static bool IsMoving;
+    public bool IsMoving;
+    public bool IsCreating;
+    public bool IsEditing;
+    public bool createBenzene;
+    public bool IsDeleting;
 
-    public static bool IsCreating;
+    public static StateManager instance;
 
-    public static bool IsEditing;
-
-    public static bool createBenzene;
-    
-    public static bool IsDeleting;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void StartMoving()
     {

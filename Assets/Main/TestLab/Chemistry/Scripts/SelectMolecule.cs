@@ -8,7 +8,7 @@ public class SelectMolecule : MonoBehaviour
 
     private void Update()
     {
-        if (StateManager.IsCreating)
+        if (StateManager.instance.IsCreating)
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -18,7 +18,7 @@ public class SelectMolecule : MonoBehaviour
                 }
                 else
                 {
-                    if (StateManager.IsCreating)
+                    if (StateManager.instance.IsCreating)
                     {
                         if (!CheckOnCanvas.OnCanvasBool)
                         {
@@ -44,7 +44,7 @@ public class SelectMolecule : MonoBehaviour
             }
 
 
-        if (StateManager.IsMoving)
+        if (StateManager.instance.IsMoving)
         {
             if (Input.GetMouseButton(0))
             {
@@ -69,7 +69,7 @@ public class SelectMolecule : MonoBehaviour
             }
         }
 
-        if (StateManager.IsEditing)
+        if (StateManager.instance.IsEditing)
         {
             if (Input.GetMouseButtonDown(0))
             {

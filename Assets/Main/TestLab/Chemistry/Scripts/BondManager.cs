@@ -27,12 +27,12 @@ public class BondManager : MonoBehaviour
 
     private void Update()
     {
-        if (!StateManager.IsCreating)
+        if (!StateManager.instance.IsCreating)
             return;
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Mouse button Down");
+            // Debug.Log("Mouse button Down");
             if (SelectMolecule.Selection() == null)
             {
                 SelectMolecule.Selection().GetComponent<Molecule>().currentlySelected = true;
@@ -50,7 +50,7 @@ public class BondManager : MonoBehaviour
                 return;
             }
 
-            Debug.Log("Mouse button Hold");
+            // Debug.Log("Mouse button Hold");
             //start Creating Bond
             if (!bondCreated)
             {
@@ -112,8 +112,6 @@ public class BondManager : MonoBehaviour
                 Destroy(currentBond);
             }
 
-
-            Debug.Log("Mouse button Up");
             bondCreated = false;
         }
     }

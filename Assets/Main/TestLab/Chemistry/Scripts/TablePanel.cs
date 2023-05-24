@@ -1,13 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TablePanel : MonoBehaviour
 {
     public GameObject panelTable;
+    public static TablePanel instance;
 
-    public void SwitchPanel()
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public  void SwitchPanel()
     {
         panelTable.SetActive(!panelTable.activeSelf);
     }
+    
+    
 }

@@ -5,7 +5,7 @@ public class DeleteSelected : MonoBehaviour
 {
     void Update()
     {
-        if (StateManager.IsDeleting)
+        if (StateManager.instance.IsDeleting)
         {
             if (Input.GetMouseButtonDown(0))
             {
