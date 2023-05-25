@@ -14547,7 +14547,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1306227783}
-  - component: {fileID: 1306227782}
   - component: {fileID: 1306227784}
   - component: {fileID: 1306227785}
   m_Layer: 0
@@ -14557,21 +14556,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1306227782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306227781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d266f1de8415864aa86119c06babe1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  molecule: {fileID: 7484862547313291308, guid: e86076e2295d1004dbc418ba47623a43, type: 3}
-  raycastDistance: 1
-  spawnDistance: 2
 --- !u!4 &1306227783
 Transform:
   m_ObjectHideFlags: 0
@@ -14599,7 +14583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0f61b650d2c2e4198ec01f26fa3a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createMolecule: {fileID: 1306227782}
 --- !u!114 &1306227785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14612,12 +14595,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fabc44597589e44a54f8f0c61097ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  molecule: {fileID: 7484862547313291308, guid: e86076e2295d1004dbc418ba47623a43, type: 3}
+  raycastDistance: 1
+  spawnDistance: 2
   _molecules: []
   First: []
   Second: []
   number1: {fileID: 4754197125393311712, guid: 9612c841fb5e2f04aa7bf23676108662, type: 3}
   number2: {fileID: 702740684889493838, guid: 30e5f1f5031eea74bbf91f64f00a8a4c, type: 3}
-  duration: 1
   firstSelected: 0
 --- !u!1 &1314441273
 GameObject:
@@ -16115,6 +16100,7 @@ MonoBehaviour:
   previosSelected: {fileID: 0}
   desiredDistance: 5
   timeToDecrease: 0.2
+  duration: 0.3
 --- !u!4 &1496203764
 Transform:
   m_ObjectHideFlags: 0
@@ -20623,11 +20609,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6723439d4a89ed74d92772c29ffe9584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMoving: 0
-  IsCreating: 0
-  IsEditing: 0
+  moveState: 0
+  createState: 0
+  editState: 0
   createBenzene: 0
-  IsDeleting: 0
+  currentState: 1
 --- !u!4 &1923009321
 Transform:
   m_ObjectHideFlags: 0
