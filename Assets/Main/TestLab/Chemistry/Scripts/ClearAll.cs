@@ -8,11 +8,11 @@ public class ClearAll : MonoBehaviour
         {
             Destroy(bond.gameObject);
         }
-        foreach (var atom in AtomManager.instance._molecules)
+        foreach (var atom in MoleculeManager.instance._molecules)
         {
             Destroy(atom.gameObject);
         }
         BondManager.Instance.bonds.Clear();
-        AtomManager.instance._molecules.Clear();
+        MoleculeManager.instance._molecules.Clear();
     }
 }

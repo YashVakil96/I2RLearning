@@ -7,7 +7,7 @@ public class EditBonds : MonoBehaviour
 
     void Update()
     {
-        if (!StateManager.Instance.editState)
+        if (!StateManager.instance.IsEditing)
         {
             return;
         }
@@ -15,26 +15,19 @@ public class EditBonds : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (CheckOnCanvas.OnCanvasBool)
+                Vector2 mousePosition =
+                    Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                RaycastHit2D hitInfo = new RaycastHit2D();
+                hitInfo = Physics2D.Raycast(mousePosition, Vector2.zero);
+                if (hitInfo.collider.gameObject.name == "Bond")
                 {
-                    return;
-                }
-                else
-                {
-                    Vector2 mousePosition =
-                        Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-                    RaycastHit2D hitInfo = new RaycastHit2D();
-                    hitInfo = Physics2D.Raycast(mousePosition, Vector2.zero);
-                    if (hitInfo.collider.gameObject.name == "Bond")
-                    {
-                        var LineObject = hitInfo.collider.gameObject;
-                        Debug.Log("Mark to delete");
-                        var crossObj = Instantiate(cross, hitInfo.collider.gameObject.transform);
-                        crossObj.transform.position = MidPoint(LineObject.GetComponent<LineRenderer>().GetPosition(0),
-                            LineObject.GetComponent<LineRenderer>().GetPosition(1));
-                        crossObj.transform.DOScale(0.1f, .3f);
-                        LineObject.GetComponent<LineContainer>().markedToDelete = true;
-                    }
+                    var LineObject = hitInfo.collider.gameObject;
+                    Debug.Log("Mark to delete");
+                    var crossObj = Instantiate(cross, hitInfo.collider.gameObject.transform);
+                    crossObj.transform.position = MidPoint(LineObject.GetComponent<LineRenderer>().GetPosition(0),
+                        LineObject.GetComponent<LineRenderer>().GetPosition(1));
+                    crossObj.transform.DOScale(0.1f, .3f);
+                    LineObject.GetComponent<LineContainer>().markedToDelete = true;
                 }
 
                 /*else if ()*
