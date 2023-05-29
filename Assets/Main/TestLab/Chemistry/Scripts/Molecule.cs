@@ -20,7 +20,7 @@ public class Molecule : MonoBehaviour
     {
         MolecuteType = MoleculeAssigner.CurrentMoleculeType;
         name = MolecuteType.ToString();
-        AtomManager.instance._molecules.Add(this);
+        MoleculeManager.instance._molecules.Add(this);
 
         SetMoleculeName(MolecuteType);
     }
@@ -39,7 +39,7 @@ public class Molecule : MonoBehaviour
 
     private void OnDestroy()
     {
-        AtomManager.instance._molecules.Remove(this);
+        MoleculeManager.instance._molecules.Remove(this);
     }
 
     /*[ContextMenu("CreateObj")]

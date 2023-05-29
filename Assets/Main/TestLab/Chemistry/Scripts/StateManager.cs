@@ -3,34 +3,35 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    public bool moveState;
-    public bool createState;
-    public bool editState;
+    public bool IsMoving;
+    public bool IsCreating;
+    public bool IsEditing;
     public bool createBenzene;
-    public CurrentState currentState;
+    public bool IsDeleting;
 
-    public static StateManager Instance;
+    public static StateManager instance;
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
     }
 
     public void StartMoving()
     {
         StopAll();
-        moveState = true;
+        IsMoving = true;
     }
 
     public void StartCreating()
     {
         StopAll();
-        createState = true;
+        IsCreating = true;
     }
 
     public void StartEditing()
     {
-        currentState = CurrentState.EditState;
+        StopAll();
+        IsEditing = true;
     }
 
     public void StartBenzene()
@@ -41,29 +42,23 @@ public class StateManager : MonoBehaviour
 
     public void StartDelete()
     {
-        currentState = CurrentState.DeleteState;
+        StopAll();
+        IsDeleting = true;
     }
 
     public void OnAnimate()
     {
-        BondManager.Instance.AnimateBonds();
+        MoleculeManager.instance.CreateBonds();
         BondManager.Instance.RemoveBonds();
     }
 
 
     public void StopAll()
     {
-        moveState = false;
-        createState = false;
-        editState = false;
+        IsMoving = false;
+        IsCreating = false;
+        IsEditing = false;
         createBenzene = false;
-    }
-
-    public enum CurrentState
-    {
-        MoveState,
-        CreateState,
-        EditState,
-        DeleteState
+        IsDeleting = false;
     }
 }
