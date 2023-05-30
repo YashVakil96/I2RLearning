@@ -38,17 +38,14 @@ public class AtomManager : MonoBehaviour
                 {
                     if (!CheckOnCanvas.OnCanvasBool)
                     {
-                        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                        RaycastHit hit;
-
-                        if (Physics.Raycast(ray, out hit))
+                        Vector2 mousePosition =
+                            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                        RaycastHit2D hitInfo = new RaycastHit2D();
+                        hitInfo = Physics2D.Raycast(mousePosition, Vector2.zero);
+                        if (hitInfo.collider != null)
                         {
-                            // Check if the raycast hit an object with a collider
-                            if (hit.collider != null)
-                            {
-                                Debug.Log("Overlap detected! Cannot create item.");
-                                return;
-                            }
+                            Debug.Log(hitInfo.collider.name);
+                            return;
                         }
 
                         CreateAtom();

@@ -30,8 +30,8 @@ public class BondManager : MonoBehaviour
 
     private void Update()
     {
-        if (!StateManager.Instance.createState)
-            return;
+        /*if (!StateManager.Instance.createState)
+            return;*/
 
         if (Input.GetMouseButtonDown(0))
         {

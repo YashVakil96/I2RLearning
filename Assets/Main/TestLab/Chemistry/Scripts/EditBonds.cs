@@ -7,7 +7,7 @@ public class EditBonds : MonoBehaviour
 
     void Update()
     {
-        if (!StateManager.Instance.editState)
+        if (StateManager.Instance.currentState != StateManager.CurrentState.EditState)
         {
             return;
         }
