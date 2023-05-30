@@ -20,6 +20,9 @@ public class BondManager : MonoBehaviour
 
     public float timeToDecrease = 5.0f;
 
+    public float duration;
+
+
     private void Awake()
     {
         Instance = this;
@@ -27,19 +30,26 @@ public class BondManager : MonoBehaviour
 
     private void Update()
     {
-        if (!StateManager.instance.IsCreating)
-            return;
+        /*if (!StateManager.Instance.createState)
+            return;*/
 
         if (Input.GetMouseButtonDown(0))
         {
-            // Debug.Log("Mouse button Down");
-            if (SelectMolecule.Selection() == null)
+            if (CheckOnCanvas.OnCanvasBool)
             {
-                SelectMolecule.Selection().GetComponent<Molecule>().currentlySelected = true;
+                return;
             }
             else
             {
-                return;
+                // Debug.Log("Mouse button Down");
+                if (AtomManager.Selection() == null)
+                {
+                    AtomManager.Selection().GetComponent<Molecule>().currentlySelected = true;
+                }
+                else
+                {
+                    return;
+                }
             }
         }
 
@@ -67,7 +77,7 @@ public class BondManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (SelectMolecule.Selection() != null)
+            if (AtomManager.Selection() != null)
             {
                 if (Vector2.Distance(currentLine.GetPosition(0), currentLine.GetPosition(1)) < .1f)
                 {
@@ -76,7 +86,7 @@ public class BondManager : MonoBehaviour
                 }
                 else
                 {
-                    var endPoint = SelectMolecule.Selection().gameObject;
+                    var endPoint = AtomManager.Selection().gameObject;
 
                     currentLine.SetPosition(1, endPoint.transform.position);
 
@@ -118,7 +128,7 @@ public class BondManager : MonoBehaviour
 
     private void CreateBond()
     {
-        previosSelected = SelectMolecule.Selection().gameObject;
+        previosSelected = AtomManager.Selection().gameObject;
         currentBond = new GameObject("Bond");
         currentLine = currentBond.AddComponent<LineRenderer>();
         currentLine.useWorldSpace = true;
@@ -164,5 +174,55 @@ public class BondManager : MonoBehaviour
         lineRenderer.startWidth = 0.0f;
         lineRenderer.endWidth = 0.0f;
         lineRenderer.gameObject.SetActive(false);
+    }
+
+    public void AnimateBonds()
+    {
+        for (int i = 0; i < AtomManager.instance.First.Count; i++)
+        {
+            var bond = Instantiate(new GameObject());
+            bond.name = "Bond";
+            var newLine = bond.AddComponent<LineRenderer>();
+            newLine.sortingOrder = 5;
+            bond.AddComponent<LineContainer>();
+            bond.tag = "Bond";
+            newLine.material = BondManager.Instance.singleBond;
+            StartCoroutine(AnimateLine(newLine, AtomManager.instance.First[i].transform.position,
+                AtomManager.instance.Second[i].transform.position));
+        }
+    }
+
+    IEnumerator AnimateLine(LineRenderer lineRenderer, Vector3 pointA, Vector3 pointB)
+    {
+        lineRenderer.SetPosition(0, pointA);
+        lineRenderer.SetPosition(1, pointA);
+        float startTime = Time.time;
+
+        while (Time.time - startTime < duration)
+        {
+            // Calculate how far along we are in the animation
+            float t = (Time.time - startTime) / duration;
+
+            // Update the line renderer's second position
+            Vector3 pos = Vector3.Lerp(pointA, pointB, t);
+            lineRenderer.SetPosition(1, pos);
+
+            // Update the line renderer's width to make it appear to be tapering off
+            float width = Mathf.Lerp(1f, 1f, t);
+            lineRenderer.startWidth = width;
+            lineRenderer.endWidth = width;
+
+            yield return null;
+        }
+
+        // Set the line renderer's final positions and widths
+        lineRenderer.SetPosition(1, pointB);
+        lineRenderer.startWidth = 1f;
+        lineRenderer.endWidth = 1f;
+        AtomManager.instance.RemoveNumbers();
+        lineRenderer.gameObject.AddComponent<AddEdgeColliderToLineRenderer>();
+        BondManager.Instance.bonds.Add(lineRenderer);
+        AtomManager.instance.First.Clear();
+        AtomManager.instance.Second.Clear();
     }
 }
