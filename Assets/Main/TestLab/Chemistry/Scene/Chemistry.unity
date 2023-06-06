@@ -14547,8 +14547,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1306227783}
-  - component: {fileID: 1306227784}
   - component: {fileID: 1306227785}
+  - component: {fileID: 1306227786}
   m_Layer: 0
   m_Name: MoleculeManager
   m_TagString: Untagged
@@ -14571,18 +14571,6 @@ Transform:
   m_Father: {fileID: 678462011}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1306227784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306227781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a0f61b650d2c2e4198ec01f26fa3a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1306227785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14596,14 +14584,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   molecule: {fileID: 7484862547313291308, guid: e86076e2295d1004dbc418ba47623a43, type: 3}
-  raycastDistance: 1
-  spawnDistance: 2
+  CheckMoleculeCollision: {fileID: 1306227786}
   _molecules: []
   First: []
   Second: []
   number1: {fileID: 4754197125393311712, guid: 9612c841fb5e2f04aa7bf23676108662, type: 3}
   number2: {fileID: 702740684889493838, guid: 30e5f1f5031eea74bbf91f64f00a8a4c, type: 3}
   firstSelected: 0
+--- !u!114 &1306227786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306227781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110435bf40b433147bf39c0e2c97029c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 1
 --- !u!1 &1314441273
 GameObject:
   m_ObjectHideFlags: 0

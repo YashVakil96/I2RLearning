@@ -7,8 +7,9 @@ public class AtomManager : MonoBehaviour
     public static AtomManager instance;
 
     [Header("Create")] public GameObject molecule;
-    public float raycastDistance = 1f; // Distance to cast the rays
-    public float spawnDistance = 2f; // Distance to spawn the new object
+    public CheckMoleculeCollision CheckMoleculeCollision;
+    
+    // public float spawnDistance = 2f; // Distance to spawn the new object
 
     public List<Molecule> _molecules;
 
@@ -39,7 +40,8 @@ public class AtomManager : MonoBehaviour
                     if (!CheckOnCanvas.OnCanvasBool)
                     {
                         Vector2 mousePosition =
-                            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+                            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,
+                                0));
                         RaycastHit2D hitInfo = new RaycastHit2D();
                         hitInfo = Physics2D.Raycast(mousePosition, Vector2.zero);
                         if (hitInfo.collider != null)
@@ -99,31 +101,48 @@ public class AtomManager : MonoBehaviour
             case StateManager.CurrentState.MoveState:
                 if (Input.GetMouseButton(0))
                 {
+                    if (Selection()==null)
+                    {
+                        return;
+                    }
                     if (Selection().gameObject.CompareTag("Molecule"))
                     {
                         var moveObject = Selection().gameObject;
                         var moveObjectMolecule = moveObject.GetComponent<Molecule>();
 
                         moveObject.transform.position =
-                            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+                            Camera.main.ScreenToWorldPoint(
+                                new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
 
                         for (int i = 0; i < moveObjectMolecule.NoOfBonds; i++)
                         {
                             moveObjectMolecule.bonds[i]
                                 .SetPosition(moveObjectMolecule.index[i], moveObject.transform.position);
 
-                            moveObjectMolecule.bonds[i].GetComponent<AddEdgeColliderToLineRenderer>().AdjustLineStartAndEnd(
-                                moveObjectMolecule.bonds[i], moveObjectMolecule.bonds[i].GetComponent<EdgeCollider2D>(),
-                                moveObject.transform.position, moveObjectMolecule.bonds[i].GetPosition(1));
+                            moveObjectMolecule.bonds[i].GetComponent<AddEdgeColliderToLineRenderer>()
+                                .AdjustLineStartAndEnd(
+                                    moveObjectMolecule.bonds[i],
+                                    moveObjectMolecule.bonds[i].GetComponent<EdgeCollider2D>(),
+                                    moveObject.transform.position, moveObjectMolecule.bonds[i].GetPosition(1));
                         }
                     }
                 }
+
                 break;
         }
     }
 
     private void CreateAtom()
     {
+        var checkDirection = CheckMoleculeCollision.CheckDirection(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5)));
+        Debug.Log(checkDirection);
+        
+        if (checkDirection != null)
+        {
+            return;
+        }
+        
+        
         var a = Instantiate(molecule,
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5)),
             quaternion.identity);
@@ -161,4 +180,6 @@ public class AtomManager : MonoBehaviour
 
         return null;
     }
+
+    
 }
