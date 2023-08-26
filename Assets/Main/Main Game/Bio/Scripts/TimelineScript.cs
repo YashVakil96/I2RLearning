@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Rendering;
