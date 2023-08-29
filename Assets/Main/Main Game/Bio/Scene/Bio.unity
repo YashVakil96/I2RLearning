@@ -3547,6 +3547,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Man
       objectReference: {fileID: 0}
+    - target: {fileID: 7446121249882185356, guid: d0dffe03c0151a541a6b1d694273d6ca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0dffe03c0151a541a6b1d694273d6ca, type: 3}
 --- !u!1 &827375214
@@ -69131,7 +69135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806076463}
-  m_LocalRotation: {x: 0.14979114, y: 0.57769376, z: -0.10885057, w: 0.79497427}
+  m_LocalRotation: {x: 0.14979115, y: 0.57769376, z: -0.10885057, w: 0.79497427}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

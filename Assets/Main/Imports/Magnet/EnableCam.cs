@@ -10,6 +10,7 @@ public class EnableCam : MonoBehaviour
     public CinemachineFreeLook freeLook;
     public float scrollSensitivity = 5;
     public bool ifCameraInTransition;
+    public bool rightClickEnable;
 
     private void Awake()
     {
@@ -29,15 +30,31 @@ public class EnableCam : MonoBehaviour
         }
         if (!ifCameraInTransition)
         {
-            if (Input.GetMouseButton(0))
+            if (rightClickEnable)
             {
-                freeLook.enabled = true;
-            }
+                if (Input.GetMouseButton(1))
+                {
+                    freeLook.enabled = true;
+                }
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                freeLook.enabled = false;
+                if (Input.GetMouseButtonUp(1))
+                {
+                    freeLook.enabled = false;
+                }
             }
+            else
+            {
+                if (Input.GetMouseButton(0))
+                {
+                    freeLook.enabled = true;
+                }
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    freeLook.enabled = false;
+                }    
+            }
+            
 
             if (Input.GetAxis("Mouse ScrollWheel") != 0)
             {
