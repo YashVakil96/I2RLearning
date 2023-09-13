@@ -192,7 +192,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13536291}
-  m_LocalRotation: {x: 0.07963456, y: -0.000000017679602, z: 0.0000000014123932, w: 0.99682415}
+  m_LocalRotation: {x: 0.07963456, y: 0.000000017679605, z: -0.0000000014123934, w: 0.99682415}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -730,7 +730,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580097200}
-  m_LocalRotation: {x: -0.009100471, y: -0.000000017205672, z: -1.565862e-10, w: 0.99995863}
+  m_LocalRotation: {x: -0.00910047, y: 0.000000017205664, z: 1.5658612e-10, w: 0.99995863}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1119,7 +1119,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 938710841}
-  - component: {fileID: 938710840}
   m_Layer: 0
   m_Name: QuizDataStorage
   m_TagString: Untagged
@@ -1127,25 +1126,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &938710840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 938710839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79ba0ae0295b3d6428a384c9a62fe57a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionBank:
-  - questionType: 0
-    question: 
-    option1: 
-    option2: 
-    option3: 
-    option4: 
 --- !u!4 &938710841
 Transform:
   m_ObjectHideFlags: 0
@@ -1642,7 +1622,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741245330}
-  m_LocalRotation: {x: -0.00910047, y: -0.000000034411343, z: -3.1317232e-10, w: 0.99995863}
+  m_LocalRotation: {x: -0.00910047, y: 0.00000003441134, z: 3.131723e-10, w: 0.99995863}
   m_LocalPosition: {x: 0, y: 1.17, z: -1.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
