@@ -20,7 +20,7 @@ public class Molecule : MonoBehaviour
     {
         MolecuteType = MoleculeAssigner.CurrentMoleculeType;
         name = MolecuteType.ToString();
-        AtomManager.instance._molecules.Add(this);
+        MoleculeManager.instance._molecules.Add(this);
 
         SetMoleculeName(MolecuteType);
     }
@@ -39,46 +39,8 @@ public class Molecule : MonoBehaviour
 
     private void OnDestroy()
     {
-        AtomManager.instance._molecules.Remove(this);
+        MoleculeManager.instance._molecules.Remove(this);
     }
-
-    /*[ContextMenu("CreateObj")]
-    public void CreateObjects()
-    {
-        foreach (var atom in Enum.GetNames(typeof(MolecuteType)))
-        {
-            var newobj = new GameObject(atom);
-            newobj.transform.parent = transform;
-            if (atom.Length > 1)
-            {
-                GameObject image1 = new GameObject();
-                image1.AddComponent<SpriteRenderer>();
-                image1.transform.parent = newobj.transform;
-                image1.GetComponent<SpriteRenderer>().sortingOrder = 11;
-                
-                GameObject image2 = new GameObject();
-                image2.AddComponent<SpriteRenderer>();
-                image2.transform.parent = newobj.transform;
-                image2.GetComponent<SpriteRenderer>().sortingOrder = 11;
-                
-                image1.transform.localScale = Vector3.one * 0.4f;
-                image2.transform.localScale = Vector3.one * 0.4f;
-                
-                image1.transform.position = new Vector3(-0.2f,0,0);
-                image2.transform.position = new Vector3(0.2f,0,0);
-
-                image1.GetComponent<SpriteRenderer>().sprite = testSprite;
-                image2.GetComponent<SpriteRenderer>().sprite = testSprite;
-            }
-            else
-            {
-                newobj.AddComponent<SpriteRenderer>();
-                newobj.GetComponent<SpriteRenderer>().sortingOrder = 11;
-                newobj.transform.localScale = Vector3.one * 0.5f;
-                newobj .GetComponent<SpriteRenderer>().sprite = testSprite;
-            }
-        }
-    }*/
 }
 
 public enum MolecuteType
