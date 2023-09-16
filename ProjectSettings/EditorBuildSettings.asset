@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Main/Main Game/Chemistry/Scene/Chemistry.unity
     guid: 2089c47d61719f94081487602f7d3dea
-  - enabled: 1
+  - enabled: 0
     path: Assets/Main/TestLab/Quiz/Scene/QuizScene.unity
     guid: cd51b961badd9814498bbe3dd3ead615
   m_configObjects: {}

@@ -10,7 +10,7 @@ public class CreateShapes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (StateManager.instance.createBenzene)
+        if (StateManager.Instance.createBenzene)
         {
             if (Input.GetMouseButtonDown(0))
             {

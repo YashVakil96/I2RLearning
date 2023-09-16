@@ -1,10 +1,7 @@
 using UnityEngine;
-
 public class MoleculeButton : MonoBehaviour
 {
     public MolecuteType buttonMoleculeType;
-
-
     public void CurrentMoleculeType()
     {
         MoleculeAssigner.CurrentMoleculeType = buttonMoleculeType;
@@ -13,8 +10,10 @@ public class MoleculeButton : MonoBehaviour
             TablePanel.instance.SwitchPanel();
         }
 
-        StateManager.instance.StopAll();
-        StateManager.instance.IsCreating = true;
+        StateManager.Instance.currentState = StateManager.CurrentState.CreateState;
+
+        /*StateManager.Instance.StopAll();
+        StateManager.Instance.createState = true;*/
 
         CheckOnCanvas.OnCanvasBool = false;
     }
