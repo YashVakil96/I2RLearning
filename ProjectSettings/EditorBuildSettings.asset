@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/_Quiz/Scene/QuizScene.unity
     guid: cd51b961badd9814498bbe3dd3ead615
   - enabled: 1
-    path: Assets/_Biology/Scene/Show_Quiz.unity
+    path: Assets/_Biology - Alpha/Scene/Quiz.unity
     guid: 39c50691967645e45b1a8c22ce38ec2e
   m_configObjects: {}
