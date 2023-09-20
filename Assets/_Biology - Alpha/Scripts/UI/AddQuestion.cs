@@ -11,6 +11,7 @@ public class AddQuestion : MonoBehaviour
     public GameObject dropdownButton;
     public TMP_Dropdown drop;
     public GameObject currentQuestion;
+    public Canvas canvas;
 
     private void Awake()
     {
@@ -33,7 +34,6 @@ public class AddQuestion : MonoBehaviour
                 currentQuestion = Instantiate(questionObject, content.transform);
                 currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.MultipleChoice;
                 dropdownButton.SetActive(false);
-                addButton.transform.SetAsLastSibling();
                 break;
 
             case 2:
@@ -41,24 +41,33 @@ public class AddQuestion : MonoBehaviour
                 currentQuestion = Instantiate(questionObject, content.transform);
                 currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.Label;
                 dropdownButton.SetActive(false);
-                addButton.transform.SetAsLastSibling();
                 break;
 
             case 3:
                 Debug.Log("SelectAnatomy");
                 currentQuestion = Instantiate(questionObject, content.transform);
-                currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.Label;
+                currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.SelectAnatomy;
                 dropdownButton.SetActive(false);
-                addButton.transform.SetAsLastSibling();
                 break;
 
             case 4:
                 Debug.Log("Description");
                 currentQuestion = Instantiate(questionObject, content.transform);
-                currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.Label;
+                currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.Instruction;
                 dropdownButton.SetActive(false);
-                addButton.transform.SetAsLastSibling();
                 break;
         }
+
+        
+        drop.value = 0;
+        // drop.onValueChanged.AddListener(arg0 => AddNewQuestion());
+        addButton.SetActive(false);
+        Invoke("ActiveButton",.5f);
+    }
+
+    public void ActiveButton()
+    {
+        addButton.SetActive(true);
+        addButton.transform.SetAsLastSibling();
     }
 }
