@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class AddQuestion : MonoBehaviour
     public GameObject dropdownButton;
     public TMP_Dropdown drop;
     public GameObject currentQuestion;
+    public List<QuestoinScript> queList;
     public Canvas canvas;
 
     private void Awake()
@@ -58,7 +60,10 @@ public class AddQuestion : MonoBehaviour
                 break;
         }
 
-        
+        if (!queList.Contains(currentQuestion.GetComponent<QuestoinScript>()))
+        {
+            queList.Add(currentQuestion.GetComponent<QuestoinScript>());
+        }
         drop.value = 0;
         // drop.onValueChanged.AddListener(arg0 => AddNewQuestion());
         addButton.SetActive(false);
