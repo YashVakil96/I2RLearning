@@ -12,7 +12,7 @@ public class AddQuestion : MonoBehaviour
     public GameObject dropdownButton;
     public TMP_Dropdown drop;
     public GameObject currentQuestion;
-    public List<QuestoinScript> queList;
+    public List<QuestionScript> queList;
     public Canvas canvas;
 
     private void Awake()
@@ -28,41 +28,43 @@ public class AddQuestion : MonoBehaviour
 
     public void AddNewQuestion()
     {
-        Debug.Log(drop.value.ToString());
+        // Debug.Log(drop.value.ToString());
         switch (drop.value)
         {
             case 1:
-                Debug.Log("MCQ");
+                // Debug.Log("MCQ");
                 currentQuestion = Instantiate(questionObject, content.transform);
-                currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.MultipleChoice;
+                currentQuestion.GetComponent<QuestionScript>().questionType = TypeOfQuestion.MultipleChoice;
                 dropdownButton.SetActive(false);
                 break;
 
             case 2:
-                Debug.Log("Label");
+                // Debug.Log("Label");
                 currentQuestion = Instantiate(questionObject, content.transform);
-                currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.Label;
+                currentQuestion.GetComponent<QuestionScript>().questionType = TypeOfQuestion.Label;
                 dropdownButton.SetActive(false);
+                GameManager.Instance.ChangeUIPage(UIPages.Label);
                 break;
 
             case 3:
-                Debug.Log("SelectAnatomy");
+                // Debug.Log("SelectAnatomy");
                 currentQuestion = Instantiate(questionObject, content.transform);
-                currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.SelectAnatomy;
+                currentQuestion.GetComponent<QuestionScript>().questionType = TypeOfQuestion.SelectAnatomy;
                 dropdownButton.SetActive(false);
+                GameManager.Instance.ChangeUIPage(UIPages.Label);
                 break;
 
             case 4:
-                Debug.Log("Description");
+                // Debug.Log("Description");
                 currentQuestion = Instantiate(questionObject, content.transform);
-                currentQuestion.GetComponent<QuestoinScript>().questionType = TypeOfQuestion.Instruction;
+                currentQuestion.GetComponent<QuestionScript>().questionType = TypeOfQuestion.Instruction;
                 dropdownButton.SetActive(false);
                 break;
         }
 
-        if (!queList.Contains(currentQuestion.GetComponent<QuestoinScript>()))
+        if (!queList.Contains(currentQuestion.GetComponent<QuestionScript>()))
         {
-            queList.Add(currentQuestion.GetComponent<QuestoinScript>());
+            queList.Add(currentQuestion.GetComponent<QuestionScript>());
         }
         drop.value = 0;
         // drop.onValueChanged.AddListener(arg0 => AddNewQuestion());

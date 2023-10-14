@@ -19,6 +19,8 @@ public class GameManager : SerializedMonoBehaviour
     public PaintObjectScript PaintObjectScriptRef;
     public LabelObjectScript LabelObjectScriptRef;
     public QuizObjectScript QuizObjectScriptRef;
+    public List<string> labelObjects;
+    public AddQuestion addQuestion;
 
     #endregion
 
