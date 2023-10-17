@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : SerializedMonoBehaviour
 {
@@ -16,6 +19,7 @@ public class GameManager : SerializedMonoBehaviour
     public Transform modelObjTransform;
     public GameObject model;
     public SelectObjectScript SelectObjectScriptRef;
+    public HideObjectScript HideObjectScript;
     public PaintObjectScript PaintObjectScriptRef;
     public LabelObjectScript LabelObjectScriptRef;
     public QuizObjectScript QuizObjectScriptRef;
@@ -44,6 +48,10 @@ public class GameManager : SerializedMonoBehaviour
     private void Start()
     {
         LoadSelectedObject("SkinCell");
+        for (int i = 0; i < model.transform.childCount; i++)
+        {
+            Debug.Log(model.transform.GetChild(i));
+        }
     }
 
     private void OnEnable()
@@ -53,22 +61,22 @@ public class GameManager : SerializedMonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ChangeUIPage(UIPages.Select);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ChangeUIPage(UIPages.Paint);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangeUIPage(UIPages.Label);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            ChangeUIPage(UIPages.Quiz);
-        }
+        // if (Input.GetKeyDown(KeyCode.Alpha1))
+        // {
+        //     ChangeUIPage(UIPages.Select);
+        // }
+        // if (Input.GetKeyDown(KeyCode.Alpha2))
+        // {
+        //     ChangeUIPage(UIPages.Paint);
+        // }
+        // if (Input.GetKeyDown(KeyCode.Alpha3))
+        // {
+        //     ChangeUIPage(UIPages.Label);
+        // }
+        // if (Input.GetKeyDown(KeyCode.Alpha4))
+        // {
+        //     ChangeUIPage(UIPages.Quiz);
+        // }
     }
 
     #endregion
@@ -84,14 +92,23 @@ public class GameManager : SerializedMonoBehaviour
     public void ChangeUIPage(UIPages page)
     {
         SelectObjectScriptRef.enabled = false;
+        HideObjectScript.enabled = false;
         LabelObjectScriptRef.enabled = false;
         PaintObjectScriptRef.enabled = false;
         QuizObjectScriptRef.enabled = false;
 
+        if (page!=UIPages.Hide)
+        {
+            HideObjectScript.RevertAll();
+        }
+        
         switch (page)
         {
             case UIPages.Select:
                 SelectObjectScriptRef.enabled = true;
+                break;
+            case UIPages.Hide:
+                HideObjectScript.enabled = true;
                 break;
             case UIPages.Label:
                 LabelObjectScriptRef.enabled = true;

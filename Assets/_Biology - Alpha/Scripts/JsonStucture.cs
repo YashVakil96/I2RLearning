@@ -16,6 +16,7 @@ public class SelectedObject
 public enum UIPages
 {
     Select,
+    Hide,
     Label,
     Paint,
     Quiz
