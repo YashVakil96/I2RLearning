@@ -9,22 +9,27 @@ public class HideObjectScript : MonoBehaviour
     public GameObject showHidePrefab;
     public GameObject showHidePanel;
     public Transform content;
-    private GameObject model;
-    void Start()
-    {
-        Init();
-    }
+    public GameObject model;
+    public List<GameObject> modelParts;
+    public bool isObjectHide;
+
 
     private void Init()
     {
         model = GameManager.Instance.model;
-        for (int i = 0; i < model.transform.childCount; i++)
+        if (modelParts.Count>0)
         {
-            var temp = Instantiate(showHidePrefab, content);
-            temp.GetComponent<ShowHideUIObject>().partNameText.text = model.transform.GetChild(i).name;
-            temp.GetComponent<ShowHideUIObject>().part = model.transform.GetChild(i).gameObject;
         }
-
+        else
+        {
+            for (int i = 0; i < model.transform.childCount; i++)
+            {
+                var temp = Instantiate(showHidePrefab, content);
+                modelParts.Add(temp);
+                temp.GetComponent<ShowHideUIObject>().partNameText.text = model.transform.GetChild(i).name;
+                temp.GetComponent<ShowHideUIObject>().part = model.transform.GetChild(i).gameObject;
+            }    
+        }
         showHidePanel.SetActive(true);
     }
 

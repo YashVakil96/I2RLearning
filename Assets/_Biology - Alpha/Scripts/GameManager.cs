@@ -52,6 +52,7 @@ public class GameManager : SerializedMonoBehaviour
         {
             Debug.Log(model.transform.GetChild(i));
         }
+        UIManager.Instance.bottomHudScript.Selection();
     }
 
     private void OnEnable()
@@ -99,7 +100,11 @@ public class GameManager : SerializedMonoBehaviour
 
         if (page!=UIPages.Hide)
         {
-            HideObjectScript.RevertAll();
+            if (HideObjectScript.isObjectHide)
+            {
+                HideObjectScript.RevertAll();
+            }
+
         }
         
         switch (page)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using Unity.Collections;
 using UnityEngine;
 
 public class SelectObjectScript : MonoBehaviour
@@ -10,6 +11,7 @@ public class SelectObjectScript : MonoBehaviour
     private GameObject selectedObj = null;
     public Color SelectedObjectColor = Color.yellow;
     public Material selectedObjMat;
+    public GameObject previousSelected;
 
 
     private List<Material> m_Materials = new List<Material>();
@@ -35,27 +37,35 @@ public class SelectObjectScript : MonoBehaviour
         {
             return;
         }
+
         if (selectedObj != null)
         {
+            previousSelected = selectedObj;
             DeSelectObject();
         }
         selectedObj = a.selectedObject;
         m_Materials = selectedObj.GetComponent<MeshRenderer>().materials.ToList();
         m_Materials.Add(selectedObjMat);
         selectedObj.GetComponent<MeshRenderer>().materials = m_Materials.ToArray();
-        // foreach (var mat in m_Materials)
-        // {
-        //     mat.color = SelectedObjectColor;
-        // }
+        var count = UndoRedo.Instance.undoSelectedObject.Count;
+        if (count>0)
+        {
+            if (selectedObj.name == UndoRedo.Instance.undoSelectedObject[count-1].name)
+            {
+                return;
+            }    
+        }
+
+        if (previousSelected!=null)
+        {
+            UndoRedo.Instance.undoSelectedObject.Add(previousSelected);
+        }
+
+        UndoRedo.Instance.UndoButtonInteractable();
     }
 
-    private void DeSelectObject()
+    public void DeSelectObject()
     {
-        // foreach (var mat in m_Materials)
-        // {
-        //     mat.color = Color.white;
-        // }
-
         if (m_Materials == null)
         {
             return;
@@ -68,5 +78,13 @@ public class SelectObjectScript : MonoBehaviour
         selectedObj.GetComponent<MeshRenderer>().materials = m_Materials.ToArray();
         selectedObj = null;
         m_Materials.Clear();
+    }
+
+    public void Selection(GameObject selectedObject)
+    {
+        selectedObj =selectedObject;
+        m_Materials = selectedObj.GetComponent<MeshRenderer>().materials.ToList();
+        m_Materials.Add(selectedObjMat);
+        selectedObj.GetComponent<MeshRenderer>().materials = m_Materials.ToArray();
     }
 }

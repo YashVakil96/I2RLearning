@@ -25,12 +25,14 @@ public class ShowHideUIObject : MonoBehaviour
             isShowing = false;
             showHideImage.sprite = offSprite;
             part.SetActive(false);
+            GameManager.Instance.HideObjectScript.isObjectHide = true;
         }
         else
         {
             isShowing = true;
             showHideImage.sprite = onSprite;
             part.SetActive(true);
+            GameManager.Instance.HideObjectScript.isObjectHide = false;
         }
     }
 

@@ -38,6 +38,7 @@ public class LabelObjectScript : MonoBehaviour
         uiScript.objectNameText.text = obj.selectedObject.name;
         
         uiPointsList.Add(uiScript);
+        
         if (GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.Label ||GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.SelectAnatomy)
         {
             GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().AddLabelList(uiScript.objectNameText.text);
