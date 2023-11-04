@@ -770,7 +770,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 420, y: 200}
+  m_SizeDelta: {x: 342.8925, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4856249286062613255
 CanvasRenderer:
@@ -2553,7 +2553,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 420.33655, y: 203.665}
+  m_SizeDelta: {x: 343.1673, y: 203.665}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4442841209829726331
 GameObject:
@@ -3195,7 +3195,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 420, y: 180}
+  m_SizeDelta: {x: 342.8925, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5397482740094637873
 GameObject:
@@ -3862,7 +3862,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 420.33655, y: 203.665}
+  m_SizeDelta: {x: 343.1673, y: 203.665}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6489788512240681777
 GameObject:
@@ -5228,6 +5228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionType: 0
+  question: {fileID: 4296152764824194487}
   mcqOptions: {fileID: 5350834890445579698}
   labelList: {fileID: 576496778510654785}
   labelOption: {fileID: 6121256861934736022, guid: e8cee765704a1a547bd5a7f3a24e2aa7, type: 3}
@@ -5238,7 +5239,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8725366322326887612}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 

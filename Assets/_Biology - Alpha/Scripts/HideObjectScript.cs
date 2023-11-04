@@ -16,6 +16,7 @@ public class HideObjectScript : MonoBehaviour
 
     private void Init()
     {
+        isObjectHide = true;
         model = GameManager.Instance.model;
         if (modelParts.Count>0)
         {
@@ -36,6 +37,11 @@ public class HideObjectScript : MonoBehaviour
     private void OnEnable()
     {
         Init();
+    }
+
+    private void OnDisable()
+    {
+        RevertAll();
     }
 
     public void RevertAll()

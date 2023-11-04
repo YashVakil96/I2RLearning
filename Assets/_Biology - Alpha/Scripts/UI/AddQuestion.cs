@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,17 +14,24 @@ public class AddQuestion : MonoBehaviour
     public TMP_Dropdown drop;
     public GameObject currentQuestion;
     public List<QuestionScript> queList;
-    public Canvas canvas;
 
     private void Awake()
     {
-        addButton = Instantiate(addQuestionButton, content.transform);
-        addButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => AddNewQuestion());
-        dropdownButton = GameObject.Find("Dropdown");
-        drop = FindObjectOfType<TMP_Dropdown>();
+        // addButton = Instantiate(addQuestionButton, content.transform);
+        // addButton.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => AddNewQuestion());
+        // dropdownButton = GameObject.Find("Dropdown");
+        // drop = FindObjectOfType<TMP_Dropdown>();
+        // drop.onValueChanged.AddListener(arg0 => AddNewQuestion());
+        // dropdownButton.SetActive(false);
+        
+    }
+
+    private void OnEnable()
+    {
+        dropdownButton.SetActive(true);
+        drop = dropdownButton.GetComponent<TMP_Dropdown>();
         drop.onValueChanged.AddListener(arg0 => AddNewQuestion());
         dropdownButton.SetActive(false);
-        
     }
 
     public void AddNewQuestion()
@@ -68,13 +76,13 @@ public class AddQuestion : MonoBehaviour
         }
         drop.value = 0;
         // drop.onValueChanged.AddListener(arg0 => AddNewQuestion());
-        addButton.SetActive(false);
-        Invoke("ActiveButton",.5f);
+        // addButton.SetActive(false);
+        // Invoke("ActiveButton",.5f);
     }
 
     public void ActiveButton()
     {
-        addButton.SetActive(true);
-        addButton.transform.SetAsLastSibling();
+        // addButton.SetActive(true);
+        // addButton.transform.SetAsLastSibling();
     }
 }

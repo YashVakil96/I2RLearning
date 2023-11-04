@@ -14,6 +14,8 @@ public class BottomHUD : MonoBehaviour
     public Image paintImage;
     public Image quizImage;
 
+    public bool quizOn;
+
     public void Selection()
     {
         DeselectAll();
@@ -47,6 +49,7 @@ public class BottomHUD : MonoBehaviour
         DeselectAll();
         quizImage.sprite = activeButtons[4];
         GameManager.Instance.ChangeUIPage(UIPages.Quiz);
+        quizOn = true;
     }
 
     public void DeselectAll()
@@ -56,6 +59,7 @@ public class BottomHUD : MonoBehaviour
         labelImage.sprite = deActiveButtons[2];
         paintImage.sprite = deActiveButtons[3];
         quizImage.sprite = deActiveButtons[4];
+        quizOn = false;    
     }
 }
 

@@ -2,19 +2,46 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class LabelObjectScript : MonoBehaviour
+public class LabelObjectScript : Singleton<LabelObjectScript>
 {
     // public GameObject uiPointPrefab;
     public GameObject uiPointPrefab;
+    public GameObject labelUiPanel;
+    public GameObject labelUiObjectPrefab;
+    public Transform content;
     public List<UIObjectNameScript> uiPointsList = new List<UIObjectNameScript>();
+
+
+    private void OnEnable()
+    {
+        Init();
+    }
+    
+
+    public void Init()
+    {
+        if (UIManager.Instance.bottomHudScript.quizOn)
+        {
+            
+        }
+        else
+        {
+            labelUiPanel.SetActive(true);    
+        }
+        
+    }
     
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (GameManager.Instance.currentSelectedPage == UIPages.Label)
         {
-            CreateLabelOnSelectedPoint();
+            if (Input.GetMouseButtonDown(0))
+            {
+                CreateLabelOnSelectedPoint();
+            }    
         }
     }
 
@@ -38,12 +65,24 @@ public class LabelObjectScript : MonoBehaviour
         uiScript.objectNameText.text = obj.selectedObject.name;
         
         uiPointsList.Add(uiScript);
-        
-        if (GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.Label ||GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.SelectAnatomy)
+        var uiObject =Instantiate(labelUiObjectPrefab, content);
+        uiObject.GetComponent<LabelUiObject>().name = obj.selectedObject.name;
+        uiObject.GetComponent<LabelUiObject>().Init();
+        uiObject.GetComponent<LabelUiObject>().uiGameObject = ui;
+
+        if (GameManager.Instance.currentSelectedPage == UIPages.Quiz)
         {
-            GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().AddLabelList(uiScript.objectNameText.text);
+            if (GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.Label ||GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.SelectAnatomy)
+            {
+                GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().AddLabelList(uiScript.objectNameText.text);
+            }
         }
         
+    }
+
+    public void RemoveLabel(GameObject uiObject)
+    {
+        uiPointsList.Remove(uiObject.GetComponent<UIObjectNameScript>());
     }
 
     private void OnDisable()
@@ -56,6 +95,7 @@ public class LabelObjectScript : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+        labelUiPanel.SetActive(false);
         uiPointsList.Clear();
     }
 }

@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class UndoRedo : MonoBehaviour
+public class UndoRedo : MonoBehaviour
 {
     public static UndoRedo Instance;
     

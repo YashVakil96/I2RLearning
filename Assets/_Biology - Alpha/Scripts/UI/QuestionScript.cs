@@ -8,6 +8,7 @@ public class QuestionScript : MonoBehaviour
 {
     public TypeOfQuestion questionType;
 
+    public GameObject question;
     public GameObject mcqOptions;
     public GameObject labelList;
     public GameObject labelOption;
@@ -36,20 +37,23 @@ public class QuestionScript : MonoBehaviour
 
     void Start()
     {
-
+        question.SetActive(false);
         mcqOptions.SetActive(false);
         labelList.SetActive(false);
         switch (questionType)
         {
             case TypeOfQuestion.MultipleChoice:
+                question.SetActive(true);
                 mcqOptions.SetActive(true);
                 break;
             
             case TypeOfQuestion.Label:
+                question.SetActive(true);
                 labelList.SetActive(true);
                 break;
             
             case TypeOfQuestion.SelectAnatomy:
+                question.SetActive(false);
                 labelList.SetActive(true);
                 break;
         }

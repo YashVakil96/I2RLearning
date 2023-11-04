@@ -48,10 +48,6 @@ public class GameManager : SerializedMonoBehaviour
     private void Start()
     {
         LoadSelectedObject("SkinCell");
-        for (int i = 0; i < model.transform.childCount; i++)
-        {
-            Debug.Log(model.transform.GetChild(i));
-        }
         UIManager.Instance.bottomHudScript.Selection();
     }
 
@@ -92,21 +88,18 @@ public class GameManager : SerializedMonoBehaviour
 
     public void ChangeUIPage(UIPages page)
     {
+        
+
         SelectObjectScriptRef.enabled = false;
         HideObjectScript.enabled = false;
         LabelObjectScriptRef.enabled = false;
         PaintObjectScriptRef.enabled = false;
-        QuizObjectScriptRef.enabled = false;
-
-        if (page!=UIPages.Hide)
-        {
-            if (HideObjectScript.isObjectHide)
-            {
-                HideObjectScript.RevertAll();
-            }
-
-        }
         
+        if (UIManager.Instance.bottomHudScript.quizOn)
+        {
+            QuizObjectScriptRef.enabled = false;
+        }
+
         switch (page)
         {
             case UIPages.Select:
@@ -127,8 +120,9 @@ public class GameManager : SerializedMonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(page), page, null);
         }
-        
         currentSelectedPage = page;
+
+        
     }
 
     #endregion
