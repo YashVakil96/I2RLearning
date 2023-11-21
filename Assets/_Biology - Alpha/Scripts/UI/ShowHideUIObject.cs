@@ -42,9 +42,4 @@ public class ShowHideUIObject : MonoBehaviour
         showHideImage.sprite = onSprite;
         part.SetActive(true);
     }
-
-    private void OnEnable()
-    {
-        ForceShow();
-    }
 }

@@ -70,11 +70,12 @@ public class LabelObjectScript : Singleton<LabelObjectScript>
         uiObject.GetComponent<LabelUiObject>().Init();
         uiObject.GetComponent<LabelUiObject>().uiGameObject = ui;
 
-        if (GameManager.Instance.currentSelectedPage == UIPages.Quiz)
+        if (UIManager.Instance.bottomHudScript.quizOn)
         {
             if (GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.Label ||GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.SelectAnatomy)
             {
                 GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().AddLabelList(uiScript.objectNameText.text);
+                Debug.Log("Here");
             }
         }
         

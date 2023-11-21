@@ -8,6 +8,7 @@ public class QuestionScript : MonoBehaviour
 {
     public TypeOfQuestion questionType;
 
+    public TMP_Text questionTypeText;
     public GameObject question;
     public GameObject mcqOptions;
     public GameObject labelList;
@@ -43,18 +44,24 @@ public class QuestionScript : MonoBehaviour
         switch (questionType)
         {
             case TypeOfQuestion.MultipleChoice:
+                questionTypeText.text = "MCQ";
                 question.SetActive(true);
                 mcqOptions.SetActive(true);
                 break;
             
             case TypeOfQuestion.Label:
+                questionTypeText.text = "Label";
                 question.SetActive(true);
                 labelList.SetActive(true);
                 break;
             
             case TypeOfQuestion.SelectAnatomy:
+                questionTypeText.text = "Select Anatomy";
                 question.SetActive(false);
                 labelList.SetActive(true);
+                break;
+            case TypeOfQuestion.Instruction:
+                questionTypeText.text = "Instruction";
                 break;
         }
         
@@ -62,7 +69,9 @@ public class QuestionScript : MonoBehaviour
 
     public void AddLabelList(string labelText)
     {
+        Debug.Log("Called");
         var temp =Instantiate(labelOption, labelList.transform.GetChild(0).transform.GetChild(0));
         temp.transform.GetChild(1).GetComponent<TMP_Text>().text = labelText;
+        
     }
 }

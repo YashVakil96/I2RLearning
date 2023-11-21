@@ -47,8 +47,10 @@ public class GameManager : SerializedMonoBehaviour
 
     private void Start()
     {
+        EnableCam.Instance.CanRotateCamera();
         LoadSelectedObject("SkinCell");
         UIManager.Instance.bottomHudScript.Selection();
+        HideObjectScript.Init();
     }
 
     private void OnEnable()
@@ -88,14 +90,12 @@ public class GameManager : SerializedMonoBehaviour
 
     public void ChangeUIPage(UIPages page)
     {
-        
-
         SelectObjectScriptRef.enabled = false;
         HideObjectScript.enabled = false;
         LabelObjectScriptRef.enabled = false;
         PaintObjectScriptRef.enabled = false;
         
-        if (UIManager.Instance.bottomHudScript.quizOn)
+        if (!UIManager.Instance.bottomHudScript.quizOn)
         {
             QuizObjectScriptRef.enabled = false;
         }

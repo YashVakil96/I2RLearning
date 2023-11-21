@@ -3,7 +3,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnableCam : MonoBehaviour
+public class EnableCam : Singleton<EnableCam>
 {
     // Start is called before the first frame update
 
@@ -12,6 +12,7 @@ public class EnableCam : MonoBehaviour
     public float scrollSensitivity = 5;
     public bool ifCameraInTransition;
     public bool rightClickEnable;
+    public bool canRotateCamera;
 
     private void Awake()
     {
@@ -49,15 +50,21 @@ public class EnableCam : MonoBehaviour
             }
             else
             {
-                if (Input.GetMouseButton(0))
+                if (canRotateCamera)
                 {
-                    freeLook.enabled = true;
-                }
+                    if (Input.GetMouseButton(0))
+                    {
+                        EnableFreeLook();
+                        // freeLook.enabled = true;
+                    }
 
-                if (Input.GetMouseButtonUp(0))
-                {
-                    freeLook.enabled = false;
-                }    
+                    if (Input.GetMouseButtonUp(0))
+                    {
+                        DisableFreeLook();
+                        // freeLook.enabled = false;
+                    }        
+                }
+                
             }
             
 
@@ -68,6 +75,26 @@ public class EnableCam : MonoBehaviour
         }
         
     }
+
+    public void EnableFreeLook()
+    {
+        freeLook.enabled = true;
+    }
+    
+    public void DisableFreeLook()
+    {
+        freeLook.enabled = false;
+    }
+
+    public void CanRotateCamera()
+    {
+        canRotateCamera = true;
+    }
+    public void CannotRotateCamera()
+    {
+        canRotateCamera = false;
+    }
+    
 
 
     IEnumerator Zoom()

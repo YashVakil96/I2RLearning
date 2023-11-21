@@ -5228,6 +5228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionType: 0
+  questionTypeText: {fileID: 4630662231494788399}
   question: {fileID: 4296152764824194487}
   mcqOptions: {fileID: 5350834890445579698}
   labelList: {fileID: 576496778510654785}

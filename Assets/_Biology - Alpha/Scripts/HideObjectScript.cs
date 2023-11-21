@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class HideObjectScript : MonoBehaviour
@@ -14,7 +17,7 @@ public class HideObjectScript : MonoBehaviour
     public bool isObjectHide;
 
 
-    private void Init()
+    public void Init()
     {
         isObjectHide = true;
         model = GameManager.Instance.model;
@@ -26,9 +29,12 @@ public class HideObjectScript : MonoBehaviour
             for (int i = 0; i < model.transform.childCount; i++)
             {
                 var temp = Instantiate(showHidePrefab, content);
-                modelParts.Add(temp);
+                 
                 temp.GetComponent<ShowHideUIObject>().partNameText.text = model.transform.GetChild(i).name;
                 temp.GetComponent<ShowHideUIObject>().part = model.transform.GetChild(i).gameObject;
+                temp.GetComponent<ShowHideUIObject>().ForceShow();
+                temp.name = model.transform.GetChild(i).name;
+                modelParts.Add(temp);
             }    
         }
         showHidePanel.SetActive(true);
@@ -39,9 +45,33 @@ public class HideObjectScript : MonoBehaviour
         Init();
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.currentSelectedPage ==UIPages.Hide)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                var a = ObjectSelector.Instance.SelectObject();
+                var tt = a.selectedObject;
+                Debug.Log(a.selectedObject.name,a.selectedObject);
+                a.selectedObject.SetActive(false);
+                GameObject temp;
+                foreach (var item in modelParts.Where(item => item.name == tt.name))
+                {
+                    item.GetComponent<ShowHideUIObject>().ShowHide();
+                    break;
+                }
+                
+
+            }    
+        }
+        
+        
+    }
+
     private void OnDisable()
     {
-        RevertAll();
+        // RevertAll();
     }
 
     public void RevertAll()
@@ -50,6 +80,6 @@ public class HideObjectScript : MonoBehaviour
         {
             model.transform.GetChild(i).gameObject.SetActive(true);
         }   
-        showHidePanel.SetActive(false);
+        // showHidePanel.SetActive(false);
     }
 }

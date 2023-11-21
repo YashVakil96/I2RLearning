@@ -15,8 +15,8 @@ public class SelectObjectScript : MonoBehaviour
 
 
     private List<Material> m_Materials = new List<Material>();
-    
-    
+
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -43,20 +43,21 @@ public class SelectObjectScript : MonoBehaviour
             previousSelected = selectedObj;
             DeSelectObject();
         }
+
         selectedObj = a.selectedObject;
         m_Materials = selectedObj.GetComponent<MeshRenderer>().materials.ToList();
         m_Materials.Add(selectedObjMat);
         selectedObj.GetComponent<MeshRenderer>().materials = m_Materials.ToArray();
         var count = UndoRedo.Instance.undoSelectedObject.Count;
-        if (count>0)
+        if (count > 0)
         {
-            if (selectedObj.name == UndoRedo.Instance.undoSelectedObject[count-1].name)
+            if (selectedObj.name == UndoRedo.Instance.undoSelectedObject[count - 1].name)
             {
                 return;
-            }    
+            }
         }
 
-        if (previousSelected!=null)
+        if (previousSelected != null)
         {
             UndoRedo.Instance.undoSelectedObject.Add(previousSelected);
         }
@@ -70,11 +71,13 @@ public class SelectObjectScript : MonoBehaviour
         {
             return;
         }
+
         m_Materials.Remove(selectedObjMat);
         if (selectedObj == null)
         {
             return;
         }
+
         selectedObj.GetComponent<MeshRenderer>().materials = m_Materials.ToArray();
         selectedObj = null;
         m_Materials.Clear();
@@ -82,7 +85,7 @@ public class SelectObjectScript : MonoBehaviour
 
     public void Selection(GameObject selectedObject)
     {
-        selectedObj =selectedObject;
+        selectedObj = selectedObject;
         m_Materials = selectedObj.GetComponent<MeshRenderer>().materials.ToList();
         m_Materials.Add(selectedObjMat);
         selectedObj.GetComponent<MeshRenderer>().materials = m_Materials.ToArray();
