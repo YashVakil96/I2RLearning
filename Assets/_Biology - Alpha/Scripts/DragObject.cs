@@ -9,6 +9,8 @@ public class DragObject : MonoBehaviour
     {
         mZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z; 
         mOffset = gameObject.transform.position - GetMouseAsWorldPoint();
+        EnableCam.Instance.CannotRotateCamera();
+
     }
 
 
@@ -22,11 +24,17 @@ public class DragObject : MonoBehaviour
     
     public void OnMouseDragMethod()
     {
+        EnableCam.Instance.CannotRotateCamera();
         if (Input.GetMouseButton(1))
         {
             return;
         }
         transform.position = GetMouseAsWorldPoint() + mOffset;
+    }
+
+    public void OnMouseupMethod()
+    {
+        EnableCam.Instance.CanRotateCamera();
     }
 
 }
