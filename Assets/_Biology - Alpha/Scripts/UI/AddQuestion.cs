@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class AddQuestion : MonoBehaviour
     public TMP_Dropdown drop;
     public GameObject currentQuestion;
     public List<QuestionScript> queList;
+    public GameObject saveButton;
 
     private void Awake()
     {
@@ -23,7 +25,6 @@ public class AddQuestion : MonoBehaviour
         // drop = FindObjectOfType<TMP_Dropdown>();
         // drop.onValueChanged.AddListener(arg0 => AddNewQuestion());
         // dropdownButton.SetActive(false);
-        
     }
 
     private void OnEnable()
@@ -74,15 +75,58 @@ public class AddQuestion : MonoBehaviour
         {
             queList.Add(currentQuestion.GetComponent<QuestionScript>());
         }
+
         drop.value = 0;
         // drop.onValueChanged.AddListener(arg0 => AddNewQuestion());
         // addButton.SetActive(false);
         // Invoke("ActiveButton",.5f);
+        saveButton.transform.SetAsLastSibling();
     }
 
-    public void ActiveButton()
+    public void SaveQuiz()
     {
-        // addButton.SetActive(true);
-        // addButton.transform.SetAsLastSibling();
+        GameManager.Instance.questionObject.questionBank.Clear();
+        foreach (var question in queList)
+        {
+            QuestionData qd = new QuestionData();
+            qd.questionType = question.questionType;
+            qd.question = question.question.transform.GetChild(1).GetComponent<TMP_InputField>().text;
+            qd.explanation = question.explaination.transform.GetChild(1).GetComponent<TMP_InputField>().text;
+
+            switch (qd.questionType)
+            {
+                case TypeOfQuestion.MultipleChoice:
+                    for (int i = 0; i < 4; i++)
+                    {
+                        var a = question.mcqOptions.transform.GetChild(2).GetChild(i).GetChild(1)
+                            .GetComponent<TMP_InputField>().text;
+                        qd.answers.Add(a);
+                        if (question.mcqOptions.transform.GetChild(2).GetChild(i).GetComponent<Toggle>().isOn)
+                        {
+                            qd.correctAnswer = i;
+                        }
+                    }
+
+                    break;
+                case TypeOfQuestion.Label:
+                    var list = question.labelList.transform.GetChild(0).GetChild(0);
+                    for (int i = 0; i < list.childCount; i++)
+                    {
+                        qd.selectedObjectsLabel.Add(list.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text);
+                    }
+
+                    break;
+                case TypeOfQuestion.SelectAnatomy:
+                    var list2 = question.labelList.transform.GetChild(0).GetChild(0);
+                    for (int i = 0; i < list2.childCount; i++)
+                    {
+                        qd.selectedObjects.Add(list2.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text);
+                    }
+
+                    break;
+            }
+
+            GameManager.Instance.questionObject.questionBank.Add(qd);
+        }
     }
 }

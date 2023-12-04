@@ -25,7 +25,7 @@ public class GameManager : SerializedMonoBehaviour
     public QuizObjectScript QuizObjectScriptRef;
     public List<string> labelObjects;
     public AddQuestion addQuestion;
-
+    public QuestionBankScriptableObjectScript questionObject;
     #endregion
 
     #region Private Variables

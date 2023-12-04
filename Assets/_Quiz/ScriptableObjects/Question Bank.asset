@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: Question Bank
   m_EditorClassIdentifier: 
   questionBank:
-  - questionType: 0
-    question: 
-    explanation: 
+  - quizName: 
+    questionType: 2
+    question: q
+    explanation: ws
     questionCamPos: {fileID: 0}
     answers: []
     correctAnswer: 0
     selectedObjects: []
-    selectedObjectsLabel: []
+    selectedObjectsLabel:
+    - Stratum corneum
+    - vein
+    - Apocrine sweat gland
     instruction: 

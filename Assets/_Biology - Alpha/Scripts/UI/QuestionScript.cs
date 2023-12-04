@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +11,7 @@ public class QuestionScript : MonoBehaviour
     public GameObject mcqOptions;
     public GameObject labelList;
     public GameObject labelOption;
+    public GameObject explaination;
 
     // Start is called before the first frame update
     private void OnEnable()
