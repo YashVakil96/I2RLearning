@@ -90,6 +90,8 @@ public class AddQuestion : MonoBehaviour
         {
             QuestionData qd = new QuestionData();
             qd.questionType = question.questionType;
+            var objName = GameManager.Instance.model.name.Substring(0, GameManager.Instance.model.name.IndexOf('('));
+            qd.objectName = objName;
             qd.question = question.question.transform.GetChild(1).GetComponent<TMP_InputField>().text;
             qd.explanation = question.explaination.transform.GetChild(1).GetComponent<TMP_InputField>().text;
 

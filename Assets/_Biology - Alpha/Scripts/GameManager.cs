@@ -48,7 +48,7 @@ public class GameManager : SerializedMonoBehaviour
     private void Start()
     {
         EnableCam.Instance.CanRotateCamera();
-        LoadSelectedObject("SkinCell");
+        LoadSelectedObject(PlayerPrefs.GetString("ObjectToLoad", "SkinCell"));
         UIManager.Instance.bottomHudScript.Selection();
         HideObjectScript.Init();
     }

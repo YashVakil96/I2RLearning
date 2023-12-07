@@ -14,6 +14,9 @@ public class QuestionData
 {
 
     public string quizName;
+
+    public string objectName;
+    
     [EnumToggleButtons] public TypeOfQuestion questionType;
 
     [HideIf("questionType", TypeOfQuestion.Instruction)]

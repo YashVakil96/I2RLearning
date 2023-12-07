@@ -18,7 +18,14 @@ public class LoadQuiz : MonoBehaviour
     public GameObject labelPrefab;
     public GameObject submitButton;
     public GameObject nextQuestionButton;
+    [HideInInspector] public GameObject model;
+    public Transform modelObjTransform;
     
+    
+    public SelectObjectScript SelectObjectScriptRef;
+    public LabelObjectScript LabelObjectScriptRef;
+    public UIPages currentSelectedPage = UIPages.Select;
+
 
     private void Start()
     {
@@ -26,8 +33,15 @@ public class LoadQuiz : MonoBehaviour
         ShowQuestion();
     }
 
+    public void LoadSelectedObject(string objName)
+    {
+        var obj = Resources.Load("Models/" + objName) as GameObject;
+        model = Instantiate(obj, Vector3.zero, Quaternion.identity, modelObjTransform);
+    }
+    
     public void ShowQuestion()
     {
+        LoadSelectedObject(questionDatas[questionCount].objectName);
         question.text = questionDatas[questionCount].question;
         explaination.text = questionDatas[questionCount].explanation;
         mcqOptions.SetActive(false);    
@@ -35,6 +49,7 @@ public class LoadQuiz : MonoBehaviour
         switch (questionDatas[questionCount].questionType)
         {
             case TypeOfQuestion.MultipleChoice:
+                ChangeUIPage(UIPages.Select);
                 mcqOptions.SetActive(true);
                 for (int i = 0; i < mcqOptions.transform.childCount; i++)
                 {
@@ -45,6 +60,7 @@ public class LoadQuiz : MonoBehaviour
             
             case TypeOfQuestion.Label:
                 labelSelectList.SetActive(true);
+                ChangeUIPage(UIPages.Label);
                 for (int i = 0; i < questionDatas[questionCount].selectedObjectsLabel.Count; i++)
                 {
                     var a = Instantiate(labelPrefab, labelSelectList.transform);
@@ -54,6 +70,7 @@ public class LoadQuiz : MonoBehaviour
             
             case TypeOfQuestion.SelectAnatomy:
                 labelSelectList.SetActive(true);
+                ChangeUIPage(UIPages.Select);
                 for (int i = 0; i < questionDatas[questionCount].selectedObjectsLabel.Count; i++)
                 {
                     labelSelectList.transform.GetChild(i).GetChild(1).GetComponent<TMP_Text>().text =
@@ -84,5 +101,26 @@ public class LoadQuiz : MonoBehaviour
             ShowQuestion();
             nextQuestionButton.SetActive(false);
         }
+    }
+    
+    public void ChangeUIPage(UIPages page)
+    {
+        SelectObjectScriptRef.enabled = false;
+        LabelObjectScriptRef.enabled = false;
+        
+        switch (page)
+        {
+            case UIPages.Select:
+                SelectObjectScriptRef.enabled = true;
+                break;
+            case UIPages.Label:
+                LabelObjectScriptRef.enabled = true;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(page), page, null);
+        }
+        currentSelectedPage = page;
+
+        
     }
 }
