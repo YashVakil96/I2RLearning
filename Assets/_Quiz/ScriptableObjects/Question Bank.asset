@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionBank:
   - quizName: 
-    questionType: 2
-    question: q
-    explanation: ws
+    objectName: SkinCell
+    questionType: 0
+    question: Question
+    explanation: Explain
     questionCamPos: {fileID: 0}
-    answers: []
-    correctAnswer: 0
+    answers:
+    - a
+    - b
+    - c
+    - d
+    correctAnswer: 1
     selectedObjects: []
-    selectedObjectsLabel:
-    - Stratum corneum
-    - vein
-    - Apocrine sweat gland
+    selectedObjectsLabel: []
     instruction: 

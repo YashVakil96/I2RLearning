@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LabelObjectScript : Singleton<LabelObjectScript>
 {
@@ -19,29 +20,38 @@ public class LabelObjectScript : Singleton<LabelObjectScript>
     {
         Init();
     }
-    
+
 
     public void Init()
     {
         if (UIManager.Instance.bottomHudScript.quizOn)
         {
-            
         }
         else
         {
-            labelUiPanel.SetActive(true);    
+            labelUiPanel.SetActive(true);
         }
-        
     }
-    
+
     private void Update()
     {
-        if (GameManager.Instance.currentSelectedPage == UIPages.Label)
+        if (SceneManager.GetActiveScene().name == "Preview")
         {
             if (Input.GetMouseButtonDown(0))
             {
                 CreateLabelOnSelectedPoint();
-            }    
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "Quiz")
+        {
+            if (GameManager.Instance.currentSelectedPage == UIPages.Label)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    CreateLabelOnSelectedPoint();
+                }
+            }
         }
     }
 
@@ -57,28 +67,31 @@ public class LabelObjectScript : Singleton<LabelObjectScript>
         {
             return;
         }
-        
+
         var ui = Instantiate(uiPointPrefab, obj.selectedPoint, Quaternion.identity);
         var uiScript = ui.GetComponent<UIObjectNameScript>();
-        
+
         ui.name = "UI " + obj.selectedObject.name;
         uiScript.objectNameText.text = obj.selectedObject.name;
-        
+
         uiPointsList.Add(uiScript);
-        var uiObject =Instantiate(labelUiObjectPrefab, content);
+        var uiObject = Instantiate(labelUiObjectPrefab, content);
         uiObject.GetComponent<LabelUiObject>().name = obj.selectedObject.name;
         uiObject.GetComponent<LabelUiObject>().Init();
         uiObject.GetComponent<LabelUiObject>().uiGameObject = ui;
 
         if (UIManager.Instance.bottomHudScript.quizOn)
         {
-            if (GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.Label ||GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==TypeOfQuestion.SelectAnatomy)
+            if (GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==
+                TypeOfQuestion.Label ||
+                GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().questionType ==
+                TypeOfQuestion.SelectAnatomy)
             {
-                GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>().AddLabelList(uiScript.objectNameText.text);
+                GameManager.Instance.addQuestion.currentQuestion.GetComponent<QuestionScript>()
+                    .AddLabelList(uiScript.objectNameText.text);
                 Debug.Log("Here");
             }
         }
-        
     }
 
     public void RemoveLabel(GameObject uiObject)
@@ -92,10 +105,12 @@ public class LabelObjectScript : Singleton<LabelObjectScript>
         {
             return;
         }
+
         foreach (var item in uiPointsList)
         {
             Destroy(item.gameObject);
         }
+
         labelUiPanel.SetActive(false);
         uiPointsList.Clear();
     }

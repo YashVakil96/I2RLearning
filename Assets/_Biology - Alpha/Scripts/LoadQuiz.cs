@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class LoadQuiz : MonoBehaviour
+public class LoadQuiz : Singleton<LoadQuiz>
 {
     public QuestionBankScriptableObjectScript quizBank;
     public List<QuestionData> questionDatas;
